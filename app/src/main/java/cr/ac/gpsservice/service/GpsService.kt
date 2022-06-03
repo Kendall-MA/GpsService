@@ -56,11 +56,10 @@ class GpsService : IntentService("GpsService") {
                 for (location in locationResult.locations) {
                     val ubicacion = Location(null,location.latitude,location.longitude)
                     val bcIntent=Intent()
-                    //bcIntent.action=GPS
                     bcIntent.setAction(GPS)
                     bcIntent.putExtra("location", ubicacion)
                     sendBroadcast(bcIntent)
-                    locationDatabase.locationDao.insert(Location(null, ubicacion.latitude, ubicacion.longitude))
+                    locationDatabase.locationDao.insert(Location(null, location.latitude, location.longitude))
                     LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
                 }
             }
